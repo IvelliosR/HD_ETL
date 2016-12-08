@@ -4,11 +4,12 @@ import org.jsoup.*;
 import org.jsoup.nodes.Document;
 import java.io.IOException;
 import java.util.*;
+import objects.ExtractedData;
 
 public class Extractor {
 	private static String source_page = "http://www.ceneo.pl";
 	
-	public List<Document> extract(String product_number) throws IOException {
+	public ExtractedData extract(String product_number) throws IOException {
 		List<Document> pages = new ArrayList<Document>();
 		
 		String link = Extractor.source_page+"/"+product_number;
@@ -28,7 +29,7 @@ public class Extractor {
 			}
 		}
 		
-		return pages;
+		return new  ExtractedData(pages);
 	}
 	
 	private Document getPage(String link) {
