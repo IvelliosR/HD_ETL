@@ -1,5 +1,5 @@
 *.class
-MainClass.java
+RCTestMainClass.java
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
