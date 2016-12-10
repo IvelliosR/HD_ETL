@@ -7,9 +7,9 @@ public class Comment {
 	private List<String> cons;
 	private List<String> pros;
 	private String summary;
-	private int rate;
+	private float rate;
 	private String author;
-	private Date create_date;
+	private String create_date;
 	private boolean recommend;
 	private int helpful;
 	private int unhelpful;
@@ -38,11 +38,11 @@ public class Comment {
 		this.summary = summary;
 	}
 	
-	public int getRate() {
+	public float getRate() {
 		return rate;
 	}
 	
-	public void setRate(int rate) {
+	public void setRate(float rate) {
 		this.rate = rate;
 	}
 	
@@ -54,11 +54,11 @@ public class Comment {
 		this.author = author;
 	}
 	
-	public Date getCreate_date() {
+	public String getCreateDate() {
 		return create_date;
 	}
 	
-	public void setCreate_date(Date create_date) {
+	public void setCreateDate(String create_date) {
 		this.create_date = create_date;
 	}
 	

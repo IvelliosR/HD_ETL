@@ -12,15 +12,15 @@ public class ExtractedData {
 	}
 	
 	public boolean hasNext() {
-		if(this.current_position <= this.pages.size()) {
+		if(this.current_position <= (this.pages.size() - 1)) {
 			return true;
 		}
 		return false;
 	}
 	
 	public Document getNext() {
-		this.current_position = this.current_position+1;
-		return pages.get(this.current_position);
+		this.current_position = this.current_position + 1;
+		return pages.get(this.current_position - 1);
 	}
 	
 	public int getPagesQuantity() {

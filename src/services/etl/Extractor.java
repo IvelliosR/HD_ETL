@@ -35,14 +35,24 @@ public class Extractor {
 	private Document getPage(String link) {
 		Document page = null;
         try {
-            page = Jsoup.connect(link).userAgent("Mozilla").get();
+        	page = Jsoup.connect(link)
+        			.header("Accept-Encoding", "gzip, deflate")
+        			.userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64; rv:23.0) Gecko/20100101 Firefox/23.0")
+        		    .maxBodySize(0)
+        		    .timeout(600000)
+        		    .get();
+
         } catch(IOException e) {}
         
         return page;
 	}
 	
 	private boolean hasNextPage(Document page) {
-		if(page.select(".pagination").select(".page-arrow.arrow-next").isEmpty()) {
+		Boolean NotIsButtonNext = page
+									.select(".pagination")
+									.select(".page-arrow.arrow-next")
+									.isEmpty();
+		if(NotIsButtonNext) {
 			return false;
 		} else {
 			return true;
@@ -50,7 +60,11 @@ public class Extractor {
 	}
 	
 	private String getNextPageLink(Document page) {
-		String link_from_page = page.select(".pagination").select(".page-arrow.arrow-next").select("a").attr("href");
+		String link_from_page = page
+									.select(".pagination")
+									.select(".page-arrow.arrow-next")
+									.select("a")
+									.attr("href");
 		return Extractor.source_page+link_from_page;
 	}
 }
