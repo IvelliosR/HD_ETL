@@ -3,7 +3,8 @@ package services.etl;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import java.util.*;
+import java.util.List;
+import java.util.ArrayList;
 import objects.ExtractedData;
 import objects.Product;
 import objects.Comment;
@@ -53,12 +54,18 @@ public class Transformator {
 	}
 
 	private String extractModel(Document page) {
-		return page
-				.select(".main-content")
-				.select(".product")
-				.select(".product-content")
-				.select(".product-name")
-				.text();
+		String model = page
+						.select(".main-content")
+						.select(".product")
+						.select(".product-content")
+						.select(".product-name")
+						.text();
+		String brand = this.extractBrand(page);
+		if (model.startsWith(brand)) {
+			model = model.replaceFirst(brand, "");
+		}
+		
+		return model;
 	}
 	
 	private List<Remark> extractRemarks(Document page) {
@@ -135,6 +142,7 @@ public class Transformator {
 	private String extractSummary(Element page) {
 		return page
 				.select(".product-review-body")
+				.first()
 				.text();
 	}
 	

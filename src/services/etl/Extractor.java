@@ -1,9 +1,11 @@
 package services.etl;
 
-import org.jsoup.*;
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import java.io.IOException;
-import java.util.*;
+import java.util.Date;
+import java.util.List;
+import java.util.ArrayList;
 import objects.ExtractedData;
 
 public class Extractor {
@@ -13,6 +15,8 @@ public class Extractor {
 		List<Document> pages = new ArrayList<Document>();
 		
 		String link = Extractor.source_page+"/"+product_number;
+		
+		Date start_date = new Date();
 		
 		Document page = this.getPage(link);
 		if (page != null) {
@@ -29,7 +33,9 @@ public class Extractor {
 			}
 		}
 		
-		return new  ExtractedData(pages);
+		Date end_date = new Date();
+		
+		return new  ExtractedData(pages, start_date, end_date);
 	}
 	
 	private Document getPage(String link) {
