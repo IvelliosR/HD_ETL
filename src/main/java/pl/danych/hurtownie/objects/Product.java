@@ -1,8 +1,6 @@
-package objects;
+package pl.danych.hurtownie.objects;
 
 import java.util.List;
-import objects.Comment;
-import objects.Remark;
 
 public class Product {
 

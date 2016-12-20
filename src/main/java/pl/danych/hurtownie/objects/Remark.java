@@ -1,4 +1,4 @@
-package objects;
+package pl.danych.hurtownie.objects;
 
 public class Remark {
 	

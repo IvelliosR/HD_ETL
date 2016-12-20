@@ -1,12 +1,13 @@
-package services.etl;
+package pl.danych.hurtownie.services.etl;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import pl.danych.hurtownie.objects.ExtractedData;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
-import objects.ExtractedData;
+
 
 public class Extractor {
 	private static String source_page = "http://www.ceneo.pl";

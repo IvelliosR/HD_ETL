@@ -1,14 +1,13 @@
-package services.etl;
+package pl.danych.hurtownie.services.etl;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import pl.danych.hurtownie.objects.*;
+
 import java.util.List;
 import java.util.ArrayList;
-import objects.ExtractedData;
-import objects.Product;
-import objects.Comment;
-import objects.Remark;
+
 
 public class Transformator {
 	
