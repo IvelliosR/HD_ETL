@@ -1,15 +1,27 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE hibernate-configuration PUBLIC
-    "-//Hibernate/Hibernate Configuration DTD//EN"
-    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-  <session-factory>
-    <property name="connection.url">jdbc:mysql://localhost/etl</property>
-    <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="hibernate.current_session_context_class">thread</property>
-    <property name="hbm2ddl.auto">update</property>
-    <mapping class="pl.danych.hurtownie.objects.Comment"/>
-    <mapping class="pl.danych.hurtownie.objects.Product"/>
-    <mapping class="pl.danych.hurtownie.objects.Remark"/>
-  </session-factory>
+    <session-factory>
+        <!-- Database connection settings -->
+        <property name="connection.driver_class">org.h2.Driver</property>
+        <property name="connection.url">jdbc:h2:file:./database;MV_STORE=FALSE;MVCC=FALSE</property>
+        <property name="connection.username">sa</property>
+        <property name="connection.password"/>
+
+        <!-- JDBC connection pool (use the built-in) -->
+        <property name="connection.pool_size">1</property>
+
+        <!-- SQL dialect -->
+        <property name="dialect">org.hibernate.dialect.H2Dialect</property>
+
+        <!-- Echo all executed SQL to stdout -->
+        <property name="show_sql">true</property>
+
+        <property name="hbm2ddl.auto">update</property>
+        <mapping class="pl.danych.hurtownie.objects.Comment"/>
+        <mapping class="pl.danych.hurtownie.objects.Product"/>
+        <mapping class="pl.danych.hurtownie.objects.Remark"/>
+    </session-factory>
 </hibernate-configuration>

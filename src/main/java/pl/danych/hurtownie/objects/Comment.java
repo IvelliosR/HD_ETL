@@ -1,11 +1,28 @@
 package pl.danych.hurtownie.objects;
 
+import javax.persistence.*;
 import java.util.List;
 
+
+@Entity
+@Table
 public class Comment {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+
+	@ElementCollection
+	@CollectionTable(name = "cons", joinColumns = @JoinColumn(name = "id_comment"))
+	@Column(name = "cons")
 	private List<String> cons;
+
+	@ElementCollection
+	@CollectionTable(name = "pros", joinColumns = @JoinColumn(name = "id_comment"))
+	@Column(name = "pros")
 	private List<String> pros;
+
+
 	private String summary;
 	private float rate;
 	private String author;

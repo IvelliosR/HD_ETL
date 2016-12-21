@@ -68,6 +68,7 @@ public class Transformator {
 	}
 	
 	private List<Remark> extractRemarks(Document page) {
+		Remark tmpRemark =  null;
 		List<Remark> remarks = new ArrayList<Remark>();
 		Elements remarks_elements = page
 										.select("#productTechSpecs")
@@ -81,7 +82,13 @@ public class Transformator {
 			String remark_value = remark
 									.select(".attr-value")
 									.text();
-			remarks.add(new Remark(remark_key, remark_value));
+
+			//zmiana wymuszona usunieciem konstruktora
+			//remarks.add(remark_key, remark_value);
+			tmpRemark = new Remark();
+			tmpRemark.setName(remark_key);
+			tmpRemark.setValue(remark_value);
+			remarks.add(tmpRemark);
 		}
 		
 		return remarks;

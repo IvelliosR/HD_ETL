@@ -1,13 +1,25 @@
 package pl.danych.hurtownie.objects;
 
+import javax.persistence.*;
 import java.util.List;
 
+@Entity
+@Table
 public class Product {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 	private String type;
 	private String brand;
 	private String model;
+
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_remark", nullable = false)
 	private List<Remark> remarks;
+
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_comment", nullable = false)
 	private List<Comment> comments;
 	
 	public String getType() {
