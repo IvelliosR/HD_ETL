@@ -25,7 +25,8 @@ public class Comment {
 
 	private String summary;
 	private float rate;
-	private String author;
+
+	private String author = "anonim";
 	private String create_date;
 	private boolean recommend;
 	private int helpful;
@@ -101,5 +102,21 @@ public class Comment {
 	
 	public void setUnhelpful(int unhelpful) {
 		this.unhelpful = unhelpful;
+	}
+
+	@Override
+	public boolean equals(Object object){
+		if(object == null)
+			return false;
+		if(object == this)
+			return true;
+		if(object instanceof Comment){
+			Comment comment = (Comment) object;
+			if(summary.equals(comment.getSummary()) && rate == comment.getRate()
+					&& author.equals(comment.getAuthor()) && create_date.equals(comment.getCreateDate())
+					&& helpful == comment.getHelpful() && unhelpful == comment.getUnhelpful())
+				return true;
+		}
+		return false;
 	}
 }

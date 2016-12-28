@@ -14,12 +14,12 @@ public class Product {
 	private String brand;
 	private String model;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_remark", nullable = false)
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_product", nullable = false)
 	private List<Remark> remarks;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_comment", nullable = false)
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_product", nullable = false)
 	private List<Comment> comments;
 	
 	public String getType() {
@@ -68,5 +68,20 @@ public class Product {
 	
 	public int countRemarks() {
 		return this.remarks.size();
+	}
+
+	@Override
+	public boolean equals(Object object){
+		if(object == null)
+			return false;
+		if(object == this)
+			return true;
+		if(object instanceof Product){
+			Product product  = (Product) object;
+			if(type.equals(product.getType()) && brand.equals(product.getBrand())
+					&& model.equals(product.getModel()))
+				return true;
+		}
+		return false;
 	}
 }
