@@ -1,34 +1,27 @@
 package pl.danych.hurtownie.services.etl;
 
 import pl.danych.hurtownie.hibernate.dao.EntityDao;
-import pl.danych.hurtownie.hibernate.utils.HibernateUtils;
 import pl.danych.hurtownie.objects.Comment;
 import pl.danych.hurtownie.objects.Product;
+import pl.danych.hurtownie.services.LoadStatistic;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Arek on 22.12.2016.
- */
 public class Loader {
     private static EntityDao manager;
     private List<Comment> toDelete;
+    private LoadStatistic statistic;
 
     public Loader(){
         manager = new EntityDao();
+        statistic = new LoadStatistic();
     }
 
-    public String loadToDatabase(Product product){
+    public void loadToDatabase(Product product){
         manager.openCurrentSessionwithTransaction();
-
         persistOrUpdate(product);
-
         manager.closeCurrentSessionWithTransaction();
-        HibernateUtils.closeSessionFactory();
-
-        //// TODO: 24.12.2016 zwrocic dane statystyczne
-        return null;
     }
 
     private void persistOrUpdate(Product toSave){
@@ -38,6 +31,16 @@ public class Loader {
         }
         else
             saveToDatabase(toSave);
+    }
+
+    private Product isInDatabase(Product toSave){
+        List<Product> products = manager.findAll();
+
+        for(Product p: products)
+            if(toSave.equals(p))
+                return p;
+
+        return null;
     }
 
     private void updateInDatabase(Product toSave, Product fromDatabase) {
@@ -50,6 +53,7 @@ public class Loader {
         fromDatabase.getComments().removeAll(toDelete);
         manager.deleteAll(toDelete);
         manager.update(fromDatabase);
+        statistic.deletingComments(toDelete.size());
     }
 
     private void addNewComments(Product toSave, Product fromDatabase) {
@@ -62,6 +66,7 @@ public class Loader {
         List<Comment> toAdd = new ArrayList<>();
         toAdd.addAll(toSave.getComments());
         toAdd.removeAll(fromDatabase.getComments());
+        statistic.addingComments(toAdd.size());
         return toAdd;
     }
 
@@ -73,18 +78,29 @@ public class Loader {
 
     private void saveToDatabase(Product toSave) {
         manager.persist(toSave);
-        //// TODO: 24.12.2016 dodac dane statystyczne na tamat save
+        statistic.addingProducts(1);
+        statistic.addingComments(toSave.countComments());
+        statistic.addingRemarks(toSave.countRemarks());
     }
 
+    public LoadStatistic getStatistic(){
+        return statistic;
+    }
 
-    private Product isInDatabase(Product toSave){
-        List<Product> products = manager.findAll();
+    public void deleteAllComments(){
+        manager.openCurrentSessionwithTransaction();
+        List<Comment> toDelete = manager.findAllComments();
+        manager.deleteAll(toDelete);
+        statistic.deletingComments(toDelete.size());
+        manager.closeCurrentSessionWithTransaction();
+    }
 
-        for(Product p: products)
-            if(toSave.equals(p))
-                return p;
-
-        return null;
+    public List<Product> getAllProducts(){
+        List<Product> allProducts;
+        manager.openCurrentSessionwithTransaction();
+        allProducts = manager.findAll();
+        manager.closeCurrentSessionWithTransaction();
+        return allProducts;
     }
 
 

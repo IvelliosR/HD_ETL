@@ -1,5 +1,7 @@
 package pl.danych.hurtownie.objects;
 
+import javafx.beans.property.SimpleStringProperty;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -14,14 +16,17 @@ public class Product {
 	private String brand;
 	private String model;
 
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "id_product", nullable = false)
 	private List<Remark> remarks;
 
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "id_product", nullable = false)
 	private List<Comment> comments;
-	
+
+	public int getId(){
+		return id;
+	}
 	public String getType() {
 		return type;
 	}

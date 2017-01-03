@@ -22,7 +22,7 @@ public class Comment {
 	@Column(name = "pros")
 	private List<String> pros;
 
-
+	@Column(columnDefinition = "text")
 	private String summary;
 	private float rate;
 
@@ -118,5 +118,9 @@ public class Comment {
 				return true;
 		}
 		return false;
+	}
+
+	public int getId() {
+		return id;
 	}
 }

@@ -1,0 +1,34 @@
+.root{
+    -fx-background-image: url("../images/background.jpg");
+}
+
+#welcome-text {
+    -fx-font-size: 60px;
+    -fx-font-family: "Arial Black";
+    -fx-fill: #c3c4c4;
+    -fx-alignment: center;
+    -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
+}
+
+#glass-grey {
+    -fx-background-color:
+            #c3c4c4,
+            linear-gradient(#d6d6d6 50%, white 100%),
+            radial-gradient(center 50% -40%, radius 200%, #e6e6e6 45%, rgba(230,230,230,0) 50%);
+    -fx-background-radius: 30;
+    -fx-background-insets: 0,1,1;
+    -fx-text-fill: black;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );
+}
+
+#glass-red {
+    -fx-background-color:
+            #c3c4c4,
+            linear-gradient(#be1d00 50%, white 100%),
+            radial-gradient(center 50% -40%, radius 200%, #be1d00 45%, rgba(230,230,230,0) 50%);
+    -fx-background-radius: 30;
+    -fx-background-insets: 0,1,1;
+    -fx-text-fill: black;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );
+}
+

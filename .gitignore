@@ -16,3 +16,5 @@ hs_err_pid*
 target/*
 hurtownie-danych-etl.iml
 src/main/java/resources/hibernate.properties
+out/*
+database.h2.out

@@ -3,9 +3,6 @@ package pl.danych.hurtownie.hibernate.utils;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-/**
- * Created by Arek on 20.12.2016.
- */
 public class HibernateUtils {
 
     private static SessionFactory sessionFactory;
